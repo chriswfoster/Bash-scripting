@@ -1,23 +1,17 @@
 #!/bin/sh -e
 #
-# rc.local
+# sudo /path/to/THISFILENAME in rc.local
 #
-# This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "exit 0" on success or any other
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#
-# By default this script does nothing.
 
-# Print the IP address
+#THIS SCRIPT WAITS 5 seconds and sends an email, can be altered to send multiple emails with little effort.
 
 _IP=$(hostname -I) || true
 for i in {1..5}
 do
 if [ "$_IP" ]; then
-sleep 5
+
+# I chose to sleep here, giving the script enough time to register an IP
+sleep 5 
 echo "Subject: Pi IP: $_IP" | ssmtp chriswfoster@gmail.com
 fi
 done
